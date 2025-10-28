@@ -1,0 +1,355 @@
+@startuml
+title CINEFILE - Arquitetura Geral do Sistema
+
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam shadowing false
+skinparam roundcorner 10
+skinparam class {
+    BackgroundColor White
+    ArrowColor Black
+    BorderColor Black
+}
+skinparam packageStyle rectangle
+
+'=================== CORES DAS CAMADAS ===================
+skinparam package {
+    BackgroundColor<<Domain>> #FFF8E1
+    BackgroundColor<<DTO>> #E3F2FD
+    BackgroundColor<<Service>> #E8F5E9
+    BackgroundColor<<Controller>> #F3E5F5
+    BorderColor #888888
+}
+
+'=================== ENUMS ===================
+enum ObraTipo {
+    FILME
+    SERIE
+}
+
+enum UserRole {
+    ADMIN
+    USER
+}
+
+'=================== DOMAIN ===================
+package "Domain" <<Domain>> {
+    class Usuario {
+        -- Atributos --
+        - id: UUID
+        - username: String
+        - email: String
+        - senha_hash: String
+        - foto_perfil: String
+        - active: boolean
+        - role: UserRole
+    }
+
+    class Obra {
+        - obraid: Long
+        - titulo: String
+        - descricao: String
+        - tipo: ObraTipo
+        - anolancamento: Integer
+        - poster_url: String
+        - duracao: Integer
+    }
+
+    class Categoria {
+        - categoriaid: Long
+        - nome: String
+    }
+
+    class Temporada {
+        - id: UUID
+        - numero: Integer
+        - quantidadeEpisodios: Integer
+        - descricao: String
+    }
+
+    class Avaliacao {
+        - id: UUID
+        - nota: Integer
+        - comentario: String
+    }
+
+    class Comentario {
+        - comentarioid: Long
+        - texto: String
+        - datacomentario: LocalDateTime
+    }
+
+    class Configuracoes {
+        - config_id: Long
+        - preferencias: String
+    }
+
+    class LogVisualizacao {
+        - id: UUID
+        - data: LocalDateTime
+    }
+
+    class WatchlistItem {
+        - data_adicionado: LocalDateTime
+    }
+}
+
+'=================== DTOs ===================
+package "DTOs" <<DTO>> {
+    class UsuarioDTO {
+        + username: String
+        + email: String
+        + senha: String
+    }
+
+    class LoginRequest {
+        + username: String
+        + senha: String
+    }
+
+    class RequestObra {
+        + titulo: String
+        + descricao: String
+        + tipo: ObraTipo
+        + anolancamento: Integer
+        + poster_url: String
+        + duracao: Integer
+    }
+
+    class TemporadaDTO {
+        + numero: Integer
+        + quantidadeEpisodios: Integer
+        + descricao: String
+        + obraId: Long
+    }
+
+    class RequestAvaliacao {
+        + obraId: Long
+        + temporadaId: UUID
+        + nota: Integer
+        + comentario: String
+    }
+
+    class AvaliacaoResponseDTO {
+        + id: UUID
+        + nota: Integer
+        + comentario: String
+        + usuarioId: UUID
+        + obraId: Long
+    }
+
+    class ComentarioRequestDTO {
+        + texto: String
+    }
+
+    class ComentarioResponseDTO {
+        + comentarioid: Long
+        + texto: String
+        + usuarioId: UUID
+        + obraId: Long
+    }
+
+    class ConfiguracoesDTO {
+        + preferencias: String
+    }
+
+    class LogVisualizacaoRequestDTO {
+        + obraId: Long
+    }
+
+    class LogVisualizacaoResponseDTO {
+        + id: UUID
+        + obraId: Long
+        + usuarioId: UUID
+    }
+
+    class WatchlistResponseDTO {
+        + obraId: Long
+        + data_adicionado: LocalDateTime
+    }
+
+    class CategoriaDTO {
+        + nome: String
+    }
+}
+
+'=================== SERVICES ===================
+package "Services" <<Service>> {
+    class UsuarioService {
+        + create(dto: UsuarioDTO)
+        + findAll(): List<Usuario>
+        + findById(id: UUID): Usuario
+        + update(id: UUID, dto: UsuarioDTO)
+        + delete(id: UUID)
+        + login(request: LoginRequest)
+    }
+
+    class ObraService {
+        + create(dto: RequestObra)
+        + findAll(): List<Obra>
+        + findById(id: Long): Obra
+        + update(id: Long, dto: RequestObra)
+        + delete(id: Long)
+    }
+
+    class CategoriaService {
+        + create(dto: CategoriaDTO)
+        + findAll(): List<Categoria>
+        + findById(id: Long): Categoria
+        + update(id: Long, dto: CategoriaDTO)
+        + delete(id: Long)
+    }
+
+    class ComentarioService {
+        + create(dto: ComentarioRequestDTO)
+        + findAll(): List<Comentario>
+        + findById(id: Long): Comentario
+        + update(id: Long, dto: ComentarioRequestDTO)
+        + delete(id: Long)
+    }
+
+    class AvaliacaoService {
+        + create(dto: RequestAvaliacao)
+        + findAll(): List<Avaliacao>
+        + findById(id: UUID): Avaliacao
+        + update(id: UUID, dto: RequestAvaliacao)
+        + delete(id: UUID)
+    }
+
+    class ConfiguracoesService {
+        + update(id: Long, dto: ConfiguracoesDTO)
+        + findByUsuarioId(id: UUID): Configuracoes
+    }
+
+    class LogVisualizacaoService {
+        + registrarVisualizacao(dto: LogVisualizacaoRequestDTO)
+        + listarPorUsuario(id: UUID): List<LogVisualizacaoResponseDTO>
+    }
+
+    class WatchlistService {
+        + adicionar(obraId: Long, usuarioId: UUID)
+        + remover(obraId: Long, usuarioId: UUID)
+        + listar(usuarioId: UUID): List<WatchlistResponseDTO>
+    }
+
+    class TemporadaService {
+        + create(dto: TemporadaDTO)
+        + findAll(): List<Temporada>
+        + findById(id: UUID): Temporada
+        + update(id: UUID, dto: TemporadaDTO)
+        + delete(id: UUID)
+    }
+}
+
+'=================== CONTROLLERS ===================
+package "Controllers" <<Controller>> {
+    class UsuarioController {
+        + create(dto: UsuarioDTO)
+        + findAll()
+        + findById(id: UUID)
+        + update(id: UUID, dto: UsuarioDTO)
+        + delete(id: UUID)
+        + login(request: LoginRequest)
+    }
+
+    class ObraController {
+        + create(dto: RequestObra)
+        + findAll()
+        + findById(id: Long)
+        + update(id: Long, dto: RequestObra)
+        + delete(id: Long)
+    }
+
+    class CategoriaController {
+        + create(dto: CategoriaDTO)
+        + findAll()
+        + findById(id: Long)
+        + update(id: Long, dto: CategoriaDTO)
+        + delete(id: Long)
+    }
+
+    class ComentarioController {
+        + create(dto: ComentarioRequestDTO)
+        + findAll()
+        + findById(id: Long)
+        + update(id: Long, dto: ComentarioRequestDTO)
+        + delete(id: Long)
+    }
+
+    class AvaliacaoController {
+        + create(dto: RequestAvaliacao)
+        + findAll()
+        + findById(id: UUID)
+        + update(id: UUID, dto: RequestAvaliacao)
+        + delete(id: UUID)
+    }
+
+    class ConfiguracoesController {
+        + update(id: Long, dto: ConfiguracoesDTO)
+        + findByUsuarioId(id: UUID)
+    }
+
+    class LogVisualizacaoController {
+        + registrar(dto: LogVisualizacaoRequestDTO)
+        + listarPorUsuario(id: UUID)
+    }
+
+    class WatchlistController {
+        + adicionar(obraId: Long)
+        + remover(obraId: Long)
+        + listar(usuarioId: UUID)
+    }
+
+    class TemporadaController {
+        + create(dto: TemporadaDTO)
+        + findAll()
+        + findById(id: UUID)
+        + update(id: UUID, dto: TemporadaDTO)
+        + delete(id: UUID)
+    }
+}
+
+'=================== RELACIONAMENTOS ===================
+UsuarioController --> UsuarioService
+ObraController --> ObraService
+CategoriaController --> CategoriaService
+ComentarioController --> ComentarioService
+AvaliacaoController --> AvaliacaoService
+ConfiguracoesController --> ConfiguracoesService
+LogVisualizacaoController --> LogVisualizacaoService
+WatchlistController --> WatchlistService
+TemporadaController --> TemporadaService
+
+UsuarioService --> UsuarioDTO
+UsuarioService --> LoginRequest
+UsuarioService --> Usuario
+
+ObraService --> RequestObra
+ObraService --> Obra
+
+CategoriaService --> Categoria
+CategoriaService --> CategoriaDTO
+
+ComentarioService --> Comentario
+ComentarioService --> ComentarioRequestDTO
+ComentarioService --> ComentarioResponseDTO
+
+AvaliacaoService --> Avaliacao
+AvaliacaoService --> RequestAvaliacao
+AvaliacaoService --> AvaliacaoResponseDTO
+
+ConfiguracoesService --> Configuracoes
+ConfiguracoesService --> ConfiguracoesDTO
+
+LogVisualizacaoService --> LogVisualizacao
+LogVisualizacaoService --> LogVisualizacaoRequestDTO
+LogVisualizacaoService --> LogVisualizacaoResponseDTO
+
+WatchlistService --> WatchlistItem
+WatchlistService --> WatchlistResponseDTO
+
+TemporadaService --> Temporada
+TemporadaService --> TemporadaDTO
+
+@enduml
