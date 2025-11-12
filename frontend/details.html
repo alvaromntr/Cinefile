@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Detalhes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css?v=5"/>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="nav">
+    <div class="nav__container">
+      <div class="nav__brand">Cinefile</div>
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu">
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+      </button>
+      <div class="nav__right">
+        <nav class="nav__menu" aria-label="Principal">
+          <a href="index.html" class="nav__link">Catálogo</a>
+          <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+          <a href="watched.html" class="nav__link">Assistidos</a>
+          <a href="profile.html" class="nav__link requires-auth">Perfil</a>
+          <a href="login.html" class="nav__link link-login">Entrar</a>
+          <a href="register.html" class="nav__link link-register">Cadastrar</a>
+          <a href="#" class="nav__link link-logout">Sair</a>
+        </nav>
+        <form class="nav__search" id="searchForm">
+          <input type="search" id="searchInput" class="nav__searchInput" placeholder="Buscar..." />
+          <span class="nav__icon-search"></span>
+        </form>
+      </div>
+    </div>
+    <div class="nav__drawer" id="navDrawer" hidden>
+      <nav class="nav__menu" id="primaryMenu" aria-label="Principal">
+        <a href="index.html" class="nav__link">Catálogo</a>
+        <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+        <a href="watched.html" class="nav__link">Assistidos</a>
+        <a href="profile.html" class="nav__link requires-auth">Perfil</a>
+        <a href="login.html" class="nav__link link-login">Entrar</a>
+        <a href="register.html" class="nav__link link-register">Cadastrar</a>
+        <a href="#" class="nav__link link-logout">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+  <main class="details">
+    <article id="detailsCard" class="details__card">
+      <!-- preenchido via JS -->
+    </article>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 Cinefile — PFC Sistemas de Informação</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <!-- Ordem: helpers TMDB → componentes → listas/ratings → página → navegação/auth -->
+  <script src="js/tmdb.js?v=3"></script>
+  <script src="js/components.js?v=3"></script>
+  <script src="js/lists.js?v=3"></script>
+  <script src="js/ratings.js?v=3"></script>
+  <script src="js/details.js?v=3"></script>
+  <script src="js/nav.js?v=3"></script>
+  <script src="js/api.js?v=3"></script>
+  <script src="js/auth.js?v=3"></script>
+</body>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Perfil</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="nav">
+    <div class="nav__container">
+      <div class="nav__brand">Cinefile</div>
+
+      <button class="nav__toggle" id="navToggle"
+              aria-label="Abrir menu" aria-expanded="false" aria-controls="primaryMenu">
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+      </button>
+
+      <div class="nav__right">
+        <nav class="nav__menu" id="primaryMenu" aria-label="Principal">
+          <a href="index.html"       class="nav__link">Catálogo</a>
+          <a href="watchlist.html"   class="nav__link requires-auth">Watchlist</a>
+          <a href="watched.html"     class="nav__link requires-auth">Assistidos</a>
+          <a href="profile.html"     class="nav__link requires-auth is-active">Perfil</a>
+
+          <!-- alternam conforme login -->
+          <a href="login.html"       class="nav__link link-login">Entrar</a>
+          <a href="#"                class="nav__link link-logout">Sair</a>
+        </nav>
+
+        <form class="nav__search" id="searchForm" role="search" aria-label="Buscar títulos">
+          <input type="search" id="searchInput" class="nav__searchInput"
+                 placeholder="Buscar..." aria-label="Buscar por filme ou série" />
+          <span class="nav__icon-search"></span>
+        </form>
+      </div>
+    </div>
+
+    <!-- Menu mobile -->
+    <div class="nav__drawer" id="navDrawer" hidden>
+      <nav class="nav__menu" aria-label="Principal">
+        <a href="index.html"       class="nav__link">Catálogo</a>
+        <a href="watchlist.html"   class="nav__link requires-auth">Watchlist</a>
+        <a href="watched.html"     class="nav__link requires-auth">Assistidos</a>
+        <a href="profile.html"     class="nav__link requires-auth is-active">Perfil</a>
+
+        <a href="login.html"       class="nav__link link-login">Entrar</a>
+        <a href="#"                class="nav__link link-logout">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Conteúdo do Perfil -->
+  <main class="profile">
+    <!-- Cabeçalho do perfil -->
+    <section class="profile__header">
+      <img id="profileAvatar" class="profile__avatar" src="assets/avatar.png" alt="Avatar do usuário" />
+      <div class="profile__info">
+        <h1 id="profileName" class="profile__name">@usuario</h1>
+        <p class="profile__meta"><span id="memberSince">Membro desde 2025</span></p>
+      </div>
+    </section>
+
+    <!-- Últimos avaliados -->
+    <section class="row" id="pfLastRated" aria-label="Últimos avaliados">
+      <div class="row__head">
+        <h2 class="row__title">Últimos avaliados</h2>
+        <div class="row__meta" id="pfLastMeta"></div>
+      </div>
+
+      <!-- Wrapper para alternar entre vazio e trilho -->
+      <div id="pfLatestWrapper">
+        <!-- trilho (mesmo estilo de 'Assistidos') -->
+        <div class="row__scroller row__scroller--watched" id="pfScroller" tabindex="0"></div>
+
+        <!-- bolinhas de paginação (opcional futuro) -->
+        <div class="row__dots" id="pfDots" aria-label="Paginação do carrossel" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Cinefile — PFC Sistemas de Informação</p>
+  </footer>
+
+  <!-- Scripts (ordem importa) -->
+  <script src="js/data.js?v=4"></script>
+  <script src="js/tmdb.js?v=4"></script>
+  <script src="js/components.js?v=4"></script>
+  <!-- opcional: caso venha a usar Ratings no perfil -->
+  <script src="js/ratings.js?v=4"></script>
+  <script src="js/profile.js?v=4"></script>
+  <script src="js/nav.js?v=4"></script>
+  <script src="js/api.js?v=4"></script>
+  <script src="js/dev-toggle.js?v=4"></script>
+  <script src="js/auth.js?v=4"></script>
+</body>
+</html>

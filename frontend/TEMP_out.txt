@@ -1,0 +1,104 @@
+// quando ligarmos ao backend, só trocar o submit para uma requisição HTTP
+
+(function(){
+// declara variável form
+  const form = document.getElementById("registerForm");
+// declara variável $
+  const $ = id => document.getElementById(id);
+// declara variável err
+  const err = $("registerError");
+// declara variável ok
+  const ok  = $("registerOk");
+
+  // Se já estiver logado, não precisa cadastrar
+// condição
+  if (localStorage.getItem("cinefile_logged_in") === "true") {
+// redireciona navegação
+    location.href = "index.html";
+// retorna
+    return;
+  }
+
+// adiciona ouvinte de evento
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    hide(err); hide(ok);
+
+// declara variável username
+    const username = $("reg_username").value.trim();
+// declara variável email
+    const email    = $("reg_email").value.trim().toLowerCase();
+// declara variável pass1
+    const pass1    = $("reg_password").value;
+// declara variável pass2
+    const pass2    = $("reg_password2").value;
+
+    // validações básicas
+// condição
+    if (username.length < 3)  return show(err, "Usuário deve ter pelo menos 3 caracteres.");
+// condição
+    if (!email.includes("@")) return show(err, "Digite um e-mail válido.");
+// condição
+    if (pass1.length < 4)     return show(err, "Senha deve ter pelo menos 4 caracteres.");
+// condição
+    if (pass1 !== pass2)      return show(err, "As senhas não coincidem.");
+
+    // carrega "banco" local
+// declara variável users
+    const users = loadUsers();
+
+    // checa se já existe
+// condição
+    if (users.find(u => u.username.toLowerCase() === username.toLowerCase())) {
+// retorna
+      return show(err, "Este nome de usuário já está em uso.");
+    }
+// condição
+    if (users.find(u => u.email === email)) {
+// retorna
+      return show(err, "Este e-mail já está cadastrado.");
+    }
+
+    // cadastra (para demo, senha sem hash)
+    users.push({
+      username,
+      email,
+      password: pass1,
+      createdAt: Date.now()
+    });
+    saveUsers(users);
+
+    // faz login automático (sessão de demo)
+// acessa localStorage
+    localStorage.setItem("cinefile_logged_in", "true");
+// acessa localStorage
+    localStorage.setItem("cinefile_username", username);
+
+    show(ok, "Conta criada! Redirecionando…");
+    // respeita redirect se houver
+// declara variável params
+    const params = new URLSearchParams(location.search);
+// declara variável to
+    const to = params.get("redirect") || "index.html";
+// redireciona navegação
+    setTimeout(() => location.href = to, 600);
+  });
+
+// define função loadUsers
+  function loadUsers(){
+// acessa localStorage
+    try { return JSON.parse(localStorage.getItem("cinefile_users") || "[]"); }
+// retorna
+    catch { return []; }
+  }
+// define função saveUsers
+  function saveUsers(list){
+// acessa localStorage
+    localStorage.setItem("cinefile_users", JSON.stringify(list));
+  }
+// define função show
+  function show(el, msg){ el.textContent = msg; el.hidden = false; }
+// define função hide
+  function hide(el){ el.hidden = true; }
+})();
+

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Assistidos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <!-- HEADER PADRÃO -->
+  <header class="nav">
+    <div class="nav__container">
+      <!-- Logo -->
+      <div class="nav__brand">Cinefile</div>
+
+      <!-- Lado direito: menu + busca -->
+      <div class="nav__right">
+        <nav class="nav__menu" aria-label="Principal">
+          <a href="index.html"     class="nav__link">Catálogo</a>
+          <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+          <a href="watched.html"   class="nav__link requires-auth">Assistidos</a>
+          <a href="profile.html"   class="nav__link requires-auth">Perfil</a>
+
+          <!-- aparecem quando NÃO logado -->
+          <a href="login.html"     class="nav__link link-login">Entrar</a>
+          <a href="register.html"  class="nav__link link-register">Cadastrar</a>
+
+          <!-- aparece quando logado -->
+          <a href="#"              class="nav__link link-logout">Sair</a>
+        </nav>
+
+        <form class="nav__search" role="search" aria-label="Buscar títulos">
+          <input type="search" class="nav__searchInput" placeholder="Buscar..." aria-label="Buscar"/>
+          <span class="nav__icon-search"></span>
+        </form>
+      </div>
+    </div>
+  </header>
+  <!-- /HEADER -->
+
+  <main class="wl">
+    <!-- título alinhado à esquerda (wide) -->
+    <div class="wl__head wl__head--wide">
+      <h1 class="wl__title">Assistidos</h1>
+    </div>
+
+    <section class="wl__state" id="watchedState" hidden></section>
+
+    <!-- Carrossel de assistidos -->
+    <section class="row" id="watchedRow">
+      <div class="row__head">
+        <!-- meta (ex.: “9 títulos”) -->
+        <div class="row__meta" id="watchedMeta"></div>
+
+        <!-- setas -->
+        <div class="row__nav">
+          <button class="row__btn row__ctrlBtn is-left"  id="btnPrev" aria-label="Voltar">‹</button>
+          <button class="row__btn row__ctrlBtn is-right" id="btnNext" aria-label="Avançar">›</button>
+        </div>
+      </div>
+
+      <!-- trilho -->
+      <div class="row__scroller row__scroller--watched" id="watchedScroller" tabindex="0"></div>
+
+      <!-- bolinhas de paginação -->
+      <div class="row__dots" id="watchedDots" aria-label="Paginação do carrossel"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Cinefile — PFC Sistemas de Informação</p>
+  </footer>
+
+  <!-- Scripts (ordem importa) -->
+  <script src="js/data.js?v=4"></script>
+  <script src="js/tmdb.js?v=4"></script>
+  <script src="js/components.js?v=4"></script>
+
+  <!-- ratings antes de watched -->
+  <script src="js/ratings.js?v=4"></script>
+
+  <!-- página Assistidos -->
+  <script src="js/watched.js?v=4"></script>
+
+  <!-- navegação e auth -->
+  <script src="js/nav.js?v=4"></script>
+  <script src="js/api.js?v=4"></script>
+  <script src="js/dev-toggle.js?v=4"></script>
+  <script src="js/auth.js?v=4"></script>
+</body>
+</html>

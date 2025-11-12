@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Watchlist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <!-- HEADER-->
+  <header class="nav">
+    <div class="nav__container">
+      <div class="nav__brand">Cinefile</div>
+
+      <button class="nav__toggle" id="navToggle"
+              aria-label="Abrir menu" aria-expanded="false" aria-controls="primaryMenu">
+        <span class="nav__bar"></span><span class="nav__bar"></span><span class="nav__bar"></span>
+      </button>
+
+      <div class="nav__right">
+        <nav class="nav__menu" aria-label="Principal">
+  <a href="index.html" class="nav__link">Catálogo</a>
+  <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+  <a href="watched.html" class="nav__link">Assistidos</a>
+  <a href="profile.html" class="nav__link requires-auth">Perfil</a>
+
+  <!-- aparecem quando NÃO logado -->
+  <a href="login.html"    class="nav__link link-login">Entrar</a>
+  <a href="register.html" class="nav__link link-register">Cadastrar</a>
+
+  <!-- aparece quando logado -->
+  <a href="#" class="nav__link link-logout">Sair</a>
+</nav>
+
+
+        <form class="nav__search" id="searchForm" role="search" aria-label="Buscar títulos">
+          <input type="search" id="searchInput" class="nav__searchInput"
+                 placeholder="Buscar..." aria-label="Buscar por filme ou série"/>
+          <span class="nav__icon-search"></span>
+        </form>
+      </div>
+    </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO -->
+   
+<main class="wl">
+  <div class="wl__head">
+    <h1 class="wl__title">Minha Watchlist</h1>
+
+    <!-- Abas (pílulas) à direita -->
+    <div class="wlTabs" role="tablist" aria-label="Filtrar por tipo">
+      <button class="wlTab is-active" role="tab" aria-selected="true" aria-controls="wlMovies" id="tabMovies">Filmes</button>
+      <button class="wlTab"          role="tab" aria-selected="false" aria-controls="wlSeries" id="tabSeries">Séries</button>
+    </div>
+  </div>
+
+  <!-- estado/grades seguem iguais -->
+  <section class="wl__state" id="wlState" hidden></section>
+  <section class="wlGrid" id="wlMovies" role="tabpanel" aria-labelledby="tabMovies"></section>
+  <section class="wlGrid is-hidden" id="wlSeries" role="tabpanel" aria-labelledby="tabSeries"></section>
+</main>
+
+
+  <footer class="footer">
+    <p>© 2025 Cinefile — PFC Sistemas de Informação</p>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script src="js/data.js"></script>
+<script src="js/tmdb.js"></script>
+<script src="js/components.js"></script>
+<script src="js/lists.js"></script>
+<script src="js/app.js"></script>        <!-- (na home) -->
+<script src="js/details.js"></script>    <!-- (nos detalhes) -->
+<script src="js/watchlist.js"></script>  <!-- (na watchlist) -->
+<script src="js/watched.js"></script>    <!-- (se usar) -->
+<script src="js/nav.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dev-toggle.js"></script>
+<script src="js/auth.js"></script>
+
+</body>
+</html>

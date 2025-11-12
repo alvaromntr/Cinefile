@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Cadastrar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="login-page">
+  <main class="login" role="main" aria-labelledby="brand">
+    <h1 id="brand" class="login__brand">Cinefile</h1>
+
+    <form id="registerForm" class="login__form" autocomplete="off" novalidate>
+      <input id="reg_username" type="text" placeholder="Nome de usuário"
+             minlength="3" maxlength="24" required aria-label="Nome de usuário"/>
+
+      <input id="reg_email" type="email" placeholder="E-mail"
+             required aria-label="E-mail"/>
+
+      <input id="reg_password" type="password" placeholder="Senha"
+             minlength="4" maxlength="64" required aria-label="Senha"/>
+
+      <input id="reg_password2" type="password" placeholder="Confirmar senha"
+             minlength="4" maxlength="64" required aria-label="Confirmar senha"/>
+
+      <button type="submit">Criar conta</button>
+
+      <p id="registerError" class="login__error" hidden></p>
+      <p id="registerOk" class="login__meta" hidden>Conta criada! Redirecionando…</p>
+    </form>
+
+    <p class="login__meta" style="margin-top:14px">
+      Já tem conta?
+      <a href="login.html">Entrar</a>
+      <p class="login__meta">Deseja apenas dar uma olhada? <a href="index.html">Catálogo</a></p>
+    </p>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/dev-toggle.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>

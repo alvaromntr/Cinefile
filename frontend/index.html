@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinefile — Catálogo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Cabeçalho -->
+<header class="nav">
+  <div class="nav__container">
+    <!-- Logo (texto, não-link) -->
+    <div class="nav__brand">Cinefile</div>
+
+    <!-- Botão hambúrguer (visível no mobile) -->
+    <button class="nav__toggle" id="navToggle"
+            aria-label="Abrir menu" aria-expanded="false" aria-controls="primaryMenu">
+      <!-- 3 linhas do ícone -->
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+      <span class="nav__bar"></span>
+    </button>
+
+    <!-- menu e busca lado direito (desktop) -->
+    <div class="nav__right">
+<nav class="nav__menu" aria-label="Principal">
+  <a href="index.html" class="nav__link">Catálogo</a>
+  <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+  <a href="watched.html" class="nav__link requires-auth">Assistidos</a>
+  <a href="profile.html" class="nav__link requires-auth">Perfil</a>
+
+  <!-- aparecem quando NÃO logado -->
+  <a href="login.html"    class="nav__link link-login">Entrar</a>
+  <a href="register.html" class="nav__link link-register">Cadastrar</a>
+
+  <!-- aparece quando logado -->
+  <a href="#" class="nav__link link-logout">Sair</a>
+</nav>
+
+      <form class="nav__search" id="searchForm" role="search" aria-label="Buscar títulos">
+        <input type="search" id="searchInput" class="nav__searchInput"
+               placeholder="Buscar..." aria-label="Buscar por filme ou série" />
+        <span class="nav__icon-search"></span>
+      </form>
+    </div>
+  </div>
+
+  <!-- Dropdown do menu para mobile (aparece abaixo do header) -->
+  <div class="nav__drawer" id="navDrawer" hidden>
+    <nav class="nav__menu" id="primaryMenu" aria-label="Principal">
+  <a href="index.html"     class="nav__link">Catálogo</a>
+  <a href="watchlist.html" class="nav__link requires-auth">Watchlist</a>
+  <a href="watched.html"   class="nav__link requires-auth">Assistidos</a>
+  <a href="profile.html"   class="nav__link requires-auth">Perfil</a>
+  <a href="login.html"     class="nav__link link-login">Entrar</a>
+  <a href="register.html"  class="nav__link link-register">Cadastrar</a>
+  <a href="#"              class="nav__link link-logout">Sair</a>
+</nav>
+  </div>
+</header>
+
+
+  <!-- Conteúdo -->
+  <main class="home">
+    <!-- Resultados da busca -->
+    <section class="row" id="rowSearch" hidden aria-label="Resultados da busca">
+      <div class="row__head">
+        <h2 class="row__title">Resultados</h2>
+        <div class="row__meta" id="searchCount">0 resultados</div>
+      </div>
+      <div class="row__scroller" id="searchScroller" tabindex="0"></div>
+      <!-- setas flutuantes -->
+      <button class="row__ctrlBtn is-left"  data-target="searchScroller"  data-dir="prev" aria-label="Anterior">‹</button>
+      <button class="row__ctrlBtn is-right" data-target="searchScroller"  data-dir="next" aria-label="Próximo">›</button>
+    </section>
+
+    <!-- Em alta -->
+    <section class="row" aria-label="Em alta">
+      <div class="row__head">
+        <h2 class="row__title">Em alta</h2>
+      </div>
+      <div class="row__scroller" id="featuredScroller" tabindex="0"></div>
+      <button class="row__ctrlBtn is-left"  data-target="featuredScroller" data-dir="prev" aria-label="Anterior">‹</button>
+      <button class="row__ctrlBtn is-right" data-target="featuredScroller" data-dir="next" aria-label="Próximo">›</button>
+    </section>
+
+    <!-- Filmes -->
+    <section class="row" aria-label="Filmes">
+      <div class="row__head">
+        <h2 class="row__title">Filmes</h2>
+      </div>
+      <div class="row__scroller" id="moviesScroller" tabindex="0"></div>
+      <button class="row__ctrlBtn is-left"  data-target="moviesScroller"   data-dir="prev" aria-label="Anterior">‹</button>
+      <button class="row__ctrlBtn is-right" data-target="moviesScroller"   data-dir="next" aria-label="Próximo">›</button>
+    </section>
+
+    <!-- Séries -->
+    <section class="row" aria-label="Séries">
+      <div class="row__head">
+        <h2 class="row__title">Séries</h2>
+      </div>
+      <div class="row__scroller" id="seriesScroller" tabindex="0"></div>
+      <button class="row__ctrlBtn is-left"  data-target="seriesScroller"   data-dir="prev" aria-label="Anterior">‹</button>
+      <button class="row__ctrlBtn is-right" data-target="seriesScroller"   data-dir="next" aria-label="Próximo">›</button>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Cinefile — PFC Sistemas de Informação</p>
+  </footer>
+
+ <!-- ordem importa -->
+<script defer src="js/data.js"></script>
+<script defer src="js/tmdb.js"></script>
+<script defer src="js/components.js"></script>
+<script defer src="js/app.js"></script>
+<script defer src="js/nav.js"></script>
+<script defer src="js/api.js"></script>
+<script defer src="js/dev-toggle.js"></script>
+<script defer src="js/auth.js"></script>
+
+</body>
+</html>

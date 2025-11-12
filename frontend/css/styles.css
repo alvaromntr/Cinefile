@@ -1,0 +1,1203 @@
+:root {
+--bg: #14181c;          /* fundo principal */
+--surface: #1c2126;     /* superfícies/cards */
+--surface-2: #0f1418;   /* fundo mais escuro */
+--text: #d8e0e8;        /* texto principal */
+--muted: #7b8a9a;       /* texto secundário */
+--primary: #f5c518;     /* amarelo acento (similar ao IMDb) */
+--primary-hover: #ffd633;
+--radius: 12px;
+--card: 120px;   /* largura de cada pôster da watchlist (menor) */
+--gap: 20px;     /* espaço entre os pôsteres */
+
+}
+*
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body 
+{
+background: var(--bg);
+color: var(--text);
+font-family: "Inter", sans-serif;
+line-height: 1.5;
+}
+
+/* Cabeçalho */
+.nav 
+{
+position: sticky;
+top: 0;
+z-index: 100;
+background: #0f1114;          
+border-bottom: 1px solid #000;
+}
+
+.nav__container 
+{
+max-width: 1200px;
+margin: 0 auto;
+padding: 10px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.nav__menu 
+{
+display: flex;
+gap: 12px; /* espaço entre os links */
+}
+
+.nav__brand,
+.login__brand 
+{
+font-family: 'Bebas Neue', sans-serif;
+font-size: 28px;
+font-weight: 800;
+letter-spacing: 1px;
+color: var(--primary);
+cursor: default;
+text-transform: uppercase;
+text-shadow: 0 0 6px rgba(245, 197, 24, 0.6); /* leve brilho amarel */
+}
+
+.nav__right 
+{
+display: flex;
+align-items: center;
+gap: 16px; /* espaço entre menu e busca */
+}
+
+.nav__search 
+{
+position: relative;
+flex: 0 1 180px;
+}
+
+.nav__link 
+{
+font-weight: 600;
+color: var(--text);
+text-decoration: none;
+padding: 4px 6px;
+transition: color 0.2s ease;
+}
+
+.nav__link:hover,
+.nav__link:focus 
+{
+color: var(--primary);
+}
+
+.nav__link.is-active 
+{
+color: var(--primary);
+}
+
+/* Busca */
+.nav__search 
+{
+position: relative;
+flex: 0 1 180px; 
+}
+
+.nav__searchInput 
+{
+width: 100%;
+padding: 6px 30px 6px 10px;
+border-radius: 999px;
+border: 1px solid #232a30;
+background: var(--surface-2);
+color: var(--text);
+font-size: 14px;
+}
+
+.nav__searchInput::placeholder 
+{
+color: var(--muted);
+}
+
+/* Ícone lupa */
+.nav__icon-search 
+{
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+width: 14px;
+height: 14px;
+background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23d8e0e8' viewBox='0 0 24 24'><path d='M10,2a8,8,0,1,0,5.29,14H16l5,5L19,22l-5-5v-.71A8,8,0,0,0,10,2Zm0,2a6,6,0,1,1-6,6A6,6,0,0,1,10,4Z'/></svg>") no-repeat center;
+pointer-events: none;
+opacity: 0.7;
+}
+
+/* Barra de busca (amarelo no foco) */
+.nav__searchInput:focus 
+{
+outline: none;  
+border: 2px solid var(--primary);   /* borda amarela */
+color: var(--primary);              /* texto digitado amarelo */
+background-color: var(--surface-2); /* fundo escuro */
+}
+
+.nav__searchInput:focus::placeholder 
+{
+color: var(--primary);              /* placeholder amarelo */
+}
+
+/* Lupa amarela */
+.nav__searchInput:focus + .nav__icon-search 
+{
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='%23f5c518' viewBox='0 0 24 24'><path d='M10,2a8,8,0,1,0,5.29,14H16l5,5L19,22l-5-5v-.71A8,8,0,0,0,10,2Zm0,2a6,6,0,1,1-6,6A6,6,0,0,1,10,4Z'/></svg>") no-repeat center;
+}
+
+
+/* Conteúdo */
+.home 
+{
+padding: 24px 20px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.home h1 
+{
+font-size: 22px;
+margin-bottom: 8px;
+}
+
+.home p 
+{
+color: var(--muted);
+}
+
+/* Rodapé */
+.footer 
+{
+margin-top: 40px;
+padding: 20px;
+text-align: center;
+color: var(--muted);
+font-size: 14px;
+border-top: 1px solid #0e1114;
+}
+
+/* Página de login */
+.login-page 
+{
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+
+background-color: var(--bg); /* fundo base escuro */
+background-image: url("../assets/fundologin.png");
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+}
+
+.login 
+{
+background: rgba(28, 33, 38, 0.9); /* fundo semi-transparente */
+padding: 40px 32px;
+border-radius: var(--radius);
+box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+width: 100%;
+max-width: 380px;
+text-align: center;
+}
+
+
+.login__brand 
+{
+font-family: 'Bebas Neue', sans-serif;
+font-size: 42px;   /* maior que na Home */
+font-weight: 900;
+letter-spacing: 2px;
+color: var(--primary);
+text-transform: uppercase;
+text-shadow: 0 0 10px rgba(245, 197, 24, 0.7); /* brilho mais forte */
+margin-bottom: 28px;
+}
+
+.login__form 
+{
+display: grid;
+gap: 14px;
+}
+
+.login__form input 
+{
+padding: 10px 12px;
+border-radius: var(--radius);
+border: 1px solid #232a30;
+background: var(--surface-2);
+color: var(--text);
+}
+
+.login__form button 
+{
+background: var(--primary);
+color: #0b0b0b;
+font-weight: 700;
+padding: 10px;
+border: none;
+border-radius: var(--radius);
+cursor: pointer;
+}
+
+.login__form button:hover 
+{
+background: var(--primary-hover);
+}
+
+.login__meta 
+{
+margin-top: 18px;
+color: var(--muted);
+font-size: 14px;
+}
+
+.login__meta a 
+{
+color: var(--primary);
+text-decoration: none;
+}
+
+/* Inputs do login em foco */
+.login__form input:focus 
+{
+border-color: var(--primary);
+color: var(--primary);  /* texto amarelo ao digitar */
+background-color: var(--surface-2);
+outline: none;
+}
+
+.login__form input:focus::placeholder 
+{
+color: var(--primary); /* placeholder amarelo */
+}
+
+
+
+/* Estilo de erro no login */
+.login__error 
+{
+margin-top: 10px;
+color: #ff5f57; /* vermelho */
+font-size: 14px;
+}
+
+/* PERFIL — layout básico */
+.profile
+{
+max-width: 1200px; margin: 0 auto; padding: 22px 20px 32px;
+display: grid; gap: 16px;
+}
+
+/* header do perfil */
+.profile__header
+{
+  display: flex; align-items: center; gap: 16px;
+  background: var(--surface); border-radius: var(--radius); padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+
+.profile__avatar
+{
+  width: 84px; height: 84px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--primary); background:#0c0f12;
+}
+
+.profile__name
+{
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px; letter-spacing: 1px; color: var(--primary);
+  margin: 0;
+}
+
+.profile__meta
+{ color: var(--muted); margin-top: 2px; }
+
+/* abas */
+.tabs
+{ display:flex; gap: 10px; }
+.tabs__btn
+{
+  background: #293139; color: var(--text); border: 0; padding: 8px 12px;
+  border-radius: 10px; font-weight: 700; cursor: pointer;
+}
+
+.tabs__btn.is-active
+{ background: var(--primary); color: #0b0b0b; }
+
+.tab
+{ display: none; } 
+.tab.is-visible
+{ display: block; }
+
+/* grid de poster (favoritos) */
+.grid-cards
+{
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+gap: 14px;
+}
+
+.card-mini
+{
+background: var(--surface);
+border-radius: 12px; overflow: hidden;
+transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.card-mini:hover{ transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,.35); }
+.card-mini__img{ width: 100%; height: 240px; object-fit: cover; display:block; background:#0c0f12; }
+.card-mini__body{ padding: 10px; display:grid; gap:6px; }
+.card-mini__title{ font-size: 14px; font-weight:700; line-height:1.2; }
+.card-mini__meta{ font-size: 12px; color: var(--muted); }
+
+/* lista de avaliações */
+.reviews{ list-style: none; display: grid; gap: 12px; }
+
+.review
+{
+background: var(--surface); padding: 12px; border-radius: var(--radius);
+display: grid; gap: 6px;
+}
+
+.review__title{ font-weight: 700; }
+
+.review__meta{ color: var(--muted); font-size: 13px; }
+
+.review__stars{ color: var(--primary); }
+
+/* utilitário */
+.muted{ color: var(--muted); }
+
+/* HOME — Cabeçalho da seção e carrosséis */
+
+/* Container geral da home */
+.home {
+  padding: 24px 0 32px; /* respiro superior/inferior */
+}
+
+/* Seção/linha do carrossel */
+.row {
+  margin: 10px 0 22px; /* separação entre seções */
+}
+
+/* Cabeçalho da linha */
+.row__head {
+  display: grid;
+  grid-template-columns: 1fr auto auto; /* título | meta | setas */
+  align-items: end;
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto 8px;
+  padding: 0 20px;
+}
+.row__title { font-size: 18px; font-weight: 800; }
+.row__meta  { color: var(--muted); font-size: 13px; }
+
+/* Setas visuais do carrossel */
+.row__nav { display: flex; gap: 8px; }
+.row__btn {
+  background: #293139;
+  color: var(--text);
+  border: 0;
+  width: 36px;
+  height: 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1;
+}
+.row__btn:hover { background: var(--primary); color: #0b0b0b; }
+
+/* Trilho horizontal de cartões */
+.row__scroller{
+  display: grid;
+  grid-auto-flow: column;                 /* itens em fluxo horizontal */
+  grid-auto-columns: minmax(190px,190px); /* largura dos cards */
+  gap: 12px;                              /* espaçamento horizontal */
+  overflow-x: auto; overflow-y: hidden;   /* apenas rolagem horizontal */
+  scroll-snap-type: x mandatory;          /* “gruda” ao parar a rolagem */
+  scroll-behavior: smooth;                /* rolagem suave ao usar botões */
+  max-width: 1200px;                      /* largura do container */
+  margin: 0 auto;
+  padding: 0 20px 2px;                    /* padding lateral */
+}
+
+/* Aparência opcional da barra de rolagem  */
+.row__scroller::-webkit-scrollbar { height: 8px; }
+.row__scroller::-webkit-scrollbar-thumb { background: #222a30; border-radius: 999px; }
+
+/* Card do pôster */
+.item{
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;            /* arredondamento aplicado na imagem */
+  position: relative;
+  scroll-snap-align: start;    /* cada card é um ponto de parada */
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.item:hover{ transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,.35); }
+
+/* Poster */
+.item__img{
+  width: 100%;
+  height: 285px;      /* altura do poster (desktop) */
+  object-fit: cover;  /* recorta sem distorcer */
+  display: block;
+  background:#0c0f12; /* fallback escuro enquanto carrega */
+}
+
+/* Corpo do card (título + meta) */
+.item__body{ padding: 10px; display:grid; gap:6px; }
+.item__title{ font-size: 14px; font-weight:700; line-height:1.2; }
+.item__meta{ font-size: 12px; color: var(--muted); }
+
+/* Responsividade: diminuir poster em telas menores */
+@media (max-width: 900px){
+  .row__scroller{ grid-auto-columns: minmax(160px, 160px); }
+  .item__img{ height: 245px; }
+}
+@media (max-width: 720px){
+  .row__scroller{ grid-auto-columns: minmax(150px, 150px); }
+  .item__img{ height: 230px; }
+}
+
+/* Setas flutuantes - carrossel */
+.row{
+  position: relative;          /* base para posicionar as setas */
+  margin: 10px 0 22px;
+}
+.row__ctrlBtn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px; height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(20,24,28,.9);
+  color: var(--text);
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0,0,0,.5);
+  display: none;                /* aparece só no hover (desktop) */
+  z-index: 5;
+}
+.row:hover .row__ctrlBtn{ display: inline-flex; align-items:center; justify-content:center; }
+.row__ctrlBtn:hover{ background: var(--primary); color: #0b0b0b; }
+.row__ctrlBtn.is-left{  left: 8px; }
+.row__ctrlBtn.is-right{ right: 8px; }
+
+/* Em mobile, sempre visíveis  */
+@media (max-width: 780px){
+  .row__ctrlBtn{ display: inline-flex; }
+}
+
+/* Card — overlay no hover (título/ano/nota) */
+.item{
+  background: var(--surface);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: start;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.item:hover{ transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,.35); }
+
+/* camada da imagem */
+.item__img{
+  width: 100%;
+  height: 285px;
+  object-fit: cover;
+  display: block;
+  background:#0c0f12;
+}
+
+/* overlay que aparece no hover */
+.item__overlay{
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,.15) 60%, transparent);
+  opacity: 0; transition: opacity .15s ease;
+  display: grid; align-content: end;
+  padding: 10px;
+}
+.item:hover .item__overlay{ opacity: 1; }
+
+.item__ovTitle{ font-weight: 800; font-size: 14px; }
+.item__ovMeta{ font-size: 12px; color: var(--muted); }
+.item__ovStars{ color: var(--primary); font-size: 14px; }
+
+/* corpo textual sob a imagem (mantém) */
+.item__body{ padding: 10px; display:grid; gap:6px; }
+.item__title{ font-size: 14px; font-weight:700; line-height:1.2; }
+.item__meta{ font-size: 12px; color: var(--muted); }
+
+/* Responsivo do card (mantém seus valores) */
+@media (max-width: 900px){
+  .row__scroller{ grid-auto-columns: minmax(160px,160px); }
+  .item__img{ height: 245px; }
+}
+@media (max-width: 720px){
+  .row__scroller{ grid-auto-columns: minmax(150px,150px); }
+  .item__img{ height: 230px; }
+}
+
+/* PÁGINA DE DETALHES */
+.details{
+  max-width: 1200px; margin: 0 auto; padding: 22px 20px 32px;
+}
+.details__card{
+  display: grid; grid-template-columns: 260px 1fr; gap: 18px;
+  background: var(--surface); border-radius: var(--radius); padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+}
+.details__poster{
+  width: 100%; height: 390px; object-fit: cover; border-radius: 10px; background:#0c0f12;
+}
+.details__title{ font-size: 24px; font-weight: 800; }
+.details__meta{ color: var(--muted); margin-bottom: 6px; }
+.details__stars{ color: var(--primary); margin: 6px 0 12px; }
+.btn{
+  background: #293139; color: var(--text); border: 0; padding: 10px 12px;
+  border-radius: 10px; font-weight: 700; cursor: pointer;
+}
+.btn:hover{ background: var(--primary); color: #0b0b0b; }
+
+@media (max-width: 820px){
+  .details__card{ grid-template-columns: 1fr; }
+  .details__poster{ height: 320px; }
+}
+
+/* Setas desabilitadas quando não há overflow */
+.row__ctrlBtn.is-disabled {
+  opacity: .35;
+  pointer-events: none;
+  filter: grayscale(30%);
+}
+
+/* Esconde setas quando a linha NÃO tem overflow */
+.row[data-overflow="false"] .row__ctrlBtn {
+  display: none !important;
+}
+
+/* Link que envolve todo o card (para tornar o clique 100% confiável) */
+.item__link{
+  display:block;
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+.item__link:focus .item{ box-shadow: 0 0 0 2px var(--primary); }
+
+/* Garante que overlay não “mate” o clique */
+.item__overlay{ pointer-events: none; }
+
+/* Evitar sobreposição de textos no hover do card */
+.item__body{
+  transition: opacity .15s ease;
+}
+.item:hover .item__body{
+  opacity: 0;              /* some o texto de baixo quando o overlay aparece */
+}
+
+/* Se quiser o overlay um pouco mais forte (opcional) */
+.item__overlay{
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,.82),
+    rgba(0,0,0,.25) 60%,
+    transparent
+  );
+}
+
+/* Remover borda/outline azul ao focar o carrossel */
+.row__scroller{
+  outline: none;           /* remove o contorno padrão */
+}
+.row__scroller:focus{
+  outline: none;
+  box-shadow: none;        /* garante que nada apareça */
+}
+
+/* Mantemos o foco visível nos cards quando navega por teclado */
+.item__link:focus .item{
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* Ao passar o mouse sobre a faixa, o título fica amarelo */
+.row:hover .row__title{
+  color: var(--primary);
+}
+
+/* NAV: base para hambúrguer + drawer */
+.nav{ position: sticky; top: 0; z-index: 50; background: var(--bg); }
+.nav__container{
+  max-width: 1200px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.nav__brand{
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 1px; color: var(--primary);
+}
+.nav__right{ display: flex; align-items: center; gap: 14px; }
+.nav__menu{ display: flex; align-items: center; gap: 14px; }
+.nav__link{ font-weight: 700; }
+.nav__link.is-active{ color: var(--primary); }
+
+/* Botão hambúrguer (escondido no desktop) */
+.nav__toggle{
+  display: none; background: transparent; border: 0; cursor: pointer; padding: 6px;
+}
+.nav__bar{ display: block; width: 22px; height: 2px; background: var(--text); margin: 4px 0; border-radius: 2px; }
+
+/* Drawer (menu mobile) */
+.nav__drawer{
+  background: #0f1419; border-top: 1px solid #1d242c; box-shadow: 0 10px 24px rgba(0,0,0,.35);
+}
+.nav__drawerMenu{ display: grid; gap: 6px; padding: 10px 16px 12px; }
+.nav__drawerLink{
+  display: block; padding: 10px 8px; border-radius: 8px; font-weight: 700; text-decoration: none; color: var(--text);
+}
+.nav__drawerLink:hover{ background: #1a232b; color: var(--primary); }
+
+/* MOBILE FIRST (até 480px): 375px friendly */
+@media (max-width: 480px){
+  /* Header em 2 linhas */
+  .nav__container{
+    flex-wrap: wrap; gap: 8px;
+  }
+  .nav__toggle{
+    display: inline-block; /* mostra hambúrger */
+    order: 2;
+  }
+  .nav__right{
+    order: 3; width: 100%;
+    justify-content: stretch; align-items: stretch; gap: 8px;
+  }
+  /* Menu desktop some no mobile (usamos o drawer) */
+  .nav__menu{ display: none; }
+
+  /* Busca vira full-width */
+  .nav__search{ flex: 1; margin-left: 0; }
+  .nav__searchInput{ width: 100%; }
+
+  /* Carrosséis: colunas e tamanhos menores */
+  .row__head{
+    grid-template-columns: 1fr auto; /* tira a coluna da meta no mobile */
+    padding: 0 12px; margin-bottom: 6px;
+  }
+  .row__meta{ display: none; }       /* some com o “0 resultados” no título em mobile */
+  .row__title{ font-size: 18px; }
+
+  .row__scroller{
+    grid-auto-columns: minmax(128px, 128px);
+    gap: 10px;
+    padding: 0 12px 2px;
+  }
+  .item__img{ height: 192px; }
+
+  /* Setas flutuantes menores e sempre visíveis (já era assim <780px) */
+  .row__ctrlBtn{
+    width: 34px; height: 34px;
+  }
+
+  /* Footer compacto */
+  .footer{ font-size: 12px; padding: 10px; text-align: center; }
+}
+
+/* Acessibilidade extra: foco visível só onde importa */
+.row__scroller{ outline: none; }
+.row__scroller:focus{ outline: none; box-shadow: none; }
+.item__link:focus .item{ box-shadow: 0 0 0 2px var(--primary); }
+
+/* Evitar sobreposição de textos no hover do card */
+.item__body{ transition: opacity .15s ease; }
+.item:hover .item__body{ opacity: 0; }
+
+/* Quando passar o mouse pela faixa, título amarelo (já pedido antes) */
+.row:hover .row__title{ color: var(--primary); }
+.row:focus-within .row__title{ color: var(--primary); }
+
+/* WATCHLIST — grade centralizada, 5 por linha*/
+
+.wl {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Cabeçalho: título à esquerda, abas à direita */
+.wl__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: calc(5 * var(--card) + 4 * var(--gap));
+  margin: 0 auto 16px;
+}
+.wl__title {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+.wlTabs {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.wlTab {
+  background: #1a2128;
+  color: var(--text);
+  border: 1px solid #242c35;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background .15s ease;
+}
+.wlTab:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.wlTab.is-active {
+  background: var(--primary);
+  color: #0b0b0b;
+  border-color: var(--primary);
+}
+
+/* Grade de pôsteres centralizada */
+.wlGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  justify-content: center;
+  max-width: calc(5 * var(--card) + 4 * var(--gap));
+  margin: 0 auto;
+}
+.wlGrid .item {
+  width: var(--card);
+  aspect-ratio: 2/3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #111;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.wlGrid .item__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wlGrid .item__body,
+.wlGrid .item__overlay {
+  display: none !important;
+}
+.wlGrid .item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,.35);
+}
+
+/* Painel inativo escondido */
+.is-hidden { display: none !important; }
+
+/* Responsivo */
+@media (max-width: 1100px){
+  .wlGrid { max-width: calc(4 * var(--card) + 3 * var(--gap)); }
+}
+@media (max-width: 900px){
+  .wlGrid { --card: 140px; max-width: calc(3 * var(--card) + 2 * var(--gap)); }
+}
+@media (max-width: 640px){
+  .wl__head { flex-direction: column; align-items: flex-start; max-width: 100%; }
+  .wlTabs { margin-left: 0; }
+  .wl__title { font-size: 22px; }
+  .wlGrid { --card: 130px; max-width: calc(2 * var(--card) + 1 * var(--gap)); }
+}
+@media (max-width: 400px){
+  .wlGrid { --card: 160px; max-width: var(--card); }
+}
+
+/* RATING (estrelas nos detalhes) */
+
+.rating__star {
+  font-size: 26px;
+  line-height: 1;
+  color: #5a6572;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: transform .08s ease, color .12s ease;
+}
+.rating__star:hover { transform: scale(1.12); }
+.rating__star.is-on,
+.rating__star.is-hover { color: var(--primary); }
+.rating__label { margin-left: 8px; color: var(--muted); font-size: 14px; }
+
+
+/* Wrapper de detalhes */
+.details__card {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35);
+  position: relative; /* necessário pro absolute funcionar */
+  min-height: 420px;  /* garante altura mínima */
+}
+
+/* Botão Voltar fixado no canto inferior direito */
+.btn--voltar {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  text-decoration: none;   /* remove sublinhado */
+  background: #293139;
+  color: var(--text);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 700;
+  transition: background .2s ease, color .2s ease;
+}
+
+.btn--voltar:hover {
+  background: var(--primary);
+  color: #0b0b0b;
+}
+
+/* ASSISTIDOS — estrelas sob o pôster */
+
+.wlGrid--watched .item__body{
+  display: block !important;   /* reexibe o corpo do card nesta página */
+  padding: 8px 6px;
+}
+
+.wlGrid--watched .item__overlay{
+  display: none !important;    /* sem overlay no hover em Assistidos */
+}
+
+/* Estrelas somente leitura */
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.stars__icon{
+  font-size: 14px;
+  line-height: 1;
+  color: #5a6572;             /* cinza apagado */
+}
+.stars__icon.is-on{
+  color: var(--primary);      /* amarelo da marca */
+}
+
+/* SSISTIDOS — estrelas sob o pôster */
+
+/* 0) Card em coluna (imagem em cima, conteúdo embaixo) */
+.wlGrid.wlGrid--watched .item{
+  display: flex;
+  flex-direction: column;
+}
+
+.wlGrid.wlGrid--watched .item .item__img{
+  width: 100%;
+  height: auto !important;        
+  aspect-ratio: 2 / 3;            /* mantém proporção de pôster */
+  display: block;
+}
+
+.wlGrid.wlGrid--watched .item .item__body{
+  display: block !important;
+  padding: 8px 6px;
+  opacity: 1 !important;
+}
+
+.wlGrid.wlGrid--watched .item .item__overlay{
+  display: none !important;
+}
+
+.wlGrid.wlGrid--watched .stars{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+.wlGrid.wlGrid--watched .stars__icon{
+  font-size: 14px;
+  line-height: 1;
+  color: #5a6572;           /* apagada */
+}
+.wlGrid.wlGrid--watched .stars__icon.is-on{
+  color: var(--primary);    /* amarelinha da marca */
+}
+.wlGrid.wlGrid--watched .watchedTile{
+  display: block;
+  width: var(--card);            /* usa a largura da grade */
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Mantém o poster */
+.wlGrid.wlGrid--watched .watchedTile .item{
+  display: block;                
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/*pôster em proporção 2:3 */
+.wlGrid.wlGrid--watched .watchedTile .item .item__img{
+  width: 100%;
+  height: auto !important;       
+  aspect-ratio: 2 / 3;
+  display: block;
+}
+
+/* Estrelas visíveis */
+.wlGrid.wlGrid--watched .watchedTile .stars{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+.wlGrid.wlGrid--watched .watchedTile .stars__icon{
+  font-size: 14px;
+  line-height: 1;
+  color: #5a6572;                
+}
+.wlGrid.wlGrid--watched .watchedTile .stars__icon.is-on{
+  color: var(--primary);        
+}
+
+/* ASSISTIDOS — carrossel/
+
+/* O carrossel usa a largura de card definida para a watchlist */
+.row__scroller--watched{
+  grid-auto-columns: minmax(var(--card), var(--card));
+  gap: var(--gap);
+}
+
+/* O tile (link que envolve pôster + estrelas) no carrossel */
+.row__scroller--watched .watchedTile{
+  width: var(--card);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Garante pôster 2:3 e sem herdar heights antigos */
+.row__scroller--watched .watchedTile .item .item__img{
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 2 / 3;
+  display: block;
+}
+
+/* Estrelas visíveis */
+.row__scroller--watched .watchedTile .stars{
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 6px;
+}
+.row__scroller--watched .watchedTile .stars__icon{
+  font-size: 14px;
+  line-height: 1;
+  color: #5a6572;
+}
+.row__scroller--watched .watchedTile .stars__icon.is-on{
+  color: var(--primary);
+}
+
+/* Alinhar o título da página */
+.wl__head.wl__head--wide{
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  padding: 0 20px;       
+}
+
+/*  ASSISTIDOS — carrossel (ajustes) */
+
+/* cards do carrossel usam a mesma largura dos cards da watchlist */
+.row__scroller--watched{
+  grid-auto-columns: minmax(var(--card), var(--card));
+  gap: var(--gap);
+  /* esconder barra de rolagem  */
+  scrollbar-width: none;                 /* Firefox */
+}
+.row__scroller--watched::-webkit-scrollbar{ height: 0; }   /* WebKit */
+
+/* tile = link que contém o card + estrelas */
+.row__scroller--watched .watchedTile{
+  width: var(--card);
+  text-decoration: none;
+  color: inherit;
+}
+.row__scroller--watched .watchedTile .item .item__img{
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 2 / 3;
+  display: block;
+}
+
+/* estrelas sob cada pôster */
+.row__scroller--watched .watchedTile .stars{
+  display: flex; justify-content: center; gap: 4px; margin-top: 6px;
+}
+.row__scroller--watched .watchedTile .stars__icon{
+  font-size: 14px; line-height: 1; color: #5a6572;
+}
+.row__scroller--watched .watchedTile .stars__icon.is-on{
+  color: var(--primary);
+}
+/* Perfil: trilho dos últimos avaliados */
+#pfScroller:empty {
+  min-height: 0;
+  padding-bottom: 0;
+}
+#pfLastMeta {
+  color: var(--muted);
+}
+
+/* Dots de paginação */
+.row__dots{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0 0;
+}
+.row__dot{
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #515b67; opacity: .6;
+  cursor: pointer; transition: transform .15s ease, opacity .15s ease;
+}
+.row__dot.is-active{
+  background: var(--primary);
+  opacity: 1; transform: scale(1.15);
+}
+
+/* Botão ativo/ligado (watchlist/favorito) */
+.btn.is-on {
+  background: var(--primary);
+  color: #0b0b0b;
+}
+
+.details__back {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  text-decoration: none; /* remove sublinhado */
+}
+
+
+/* === Estrelas interativas (detalhes) === */
+.rate{ display:inline-flex; gap:8px; }
+.rate__star{ background:transparent; border:0; cursor:pointer; color:#7b8a9a; transition:transform .1s ease, color .1s ease; }
+.rate__star.is-on{ color: var(--primary); }
+.rate__star:hover{ transform: translateY(-2px) scale(1.05); }
+
+/* Dicas de performance */
+.item{ will-change: transform; }
+.row__scroller{ contain: layout paint; }
+
+/* estrelas de avaliação (maiores) */
+.rate {
+  display:inline-flex;
+  gap:6px;
+  font-size:28px;      /* maior */
+  cursor:pointer;
+  user-select:none;
+}
+.rate__star { opacity:.65; transition: transform .1s ease, opacity .1s ease; }
+.rate__star.is-on { color: var(--primary); opacity:1; }
+.rate__star:hover { transform: scale(1.1); }
+
+.rate {
+  display:inline-flex;
+  gap:6px;
+  font-size:28px;       /* maior e legível */
+  cursor:pointer;
+  user-select:none;
+}
+.rate__star { opacity:.65; transition:transform .1s ease, opacity .1s ease; }
+.rate__star.is-on { color: var(--primary); opacity:1; }
+.rate__star:hover { transform: scale(1.1); }
+
+/* styles.css (complemento) */
+ /* base becomes muted; override below for .is-on */
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0 1px;
+}
+.rating__star:hover{ transform: scale(1.05); }
+
+/* ----- Detalhes: controlar tamanho das estrelas ----- */
+:root{
+  --rating-size: 28px;        /* tamanho padrão */
+  --rating-size-mobile: 24px; /* tamanho para telas menores */
+}
+
+/* bloco das estrelas na página de detalhes */
+.details__rating{
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--rating-size);
+  line-height: 1;
+}
+
+/* botão de estrela individual */
+ /* base becomes muted; override below for .is-on */ /* seu amarelo */
+  font-size: inherit;    /* pega o --rating-size do pai */
+  line-height: inherit;
+  padding: 0 1px;
+  transition: transform .1s ease;
+}
+.rating__star:hover{ transform: scale(1.06); }
+
+/* mobile: diminui um pouco */
+@media (max-width: 640px){
+  .details__rating{ font-size: var(--rating-size-mobile); }
+}
+
+/* Estrelas na página Assistidos (abaixo do poster) */
+.watched__stars{
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--primary);
+  letter-spacing: 1px;
+}
+
+
+
+
+/* Overlay visual para o detalhe: coloca as estrelas interativas sobre a linha do TMDB */
+.details__info{ position: relative; }
+/* Quando existir uma segunda linha de rating (a interativa), sobrepõe a primeira */
+.details__info .details__rating + .details__rating{ padding-top: 22px; }
+.details__info .details__rating + .details__rating .rating{ margin-top: -22px; }
+/* Sobreposi��o precisa: permite que as estrelas interativas fiquem por cima das estrelas do TMDB */
+.details__info .details__rating{ position: relative; min-height: 1.2em; }
+.details__info .details__rating .rating{ z-index: 2; }
+/* Ajuste fino para alinhar as estrelas interativas exatamente sobre o texto */
+.details__info .details__rating .rating{ gap:0; line-height: inherit; }
+.details__info .details__rating .rating .rating__star{ padding:0; margin:0; font-size: inherit; line-height: inherit; }
+/* inner grid for details card */
+.details__card > .details__card-inner{
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+.details__poster{ width: 260px; height: auto; border-radius: 8px; }
+.details__info{ align-self: start; }
